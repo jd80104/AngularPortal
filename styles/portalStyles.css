@@ -1,0 +1,97 @@
+﻿/* 
+    Written By: John D Sanders
+    Last Update: 11/9/2013
+    Description: Angular/Jquery portal template with drag and drop portlets.
+*/
+body
+{
+    font-family: Verdana;
+    height: 600px;
+    width: 100%;
+}
+
+.moveablePortletBase
+{
+    background-color: #BF8F30;
+    margin: 5px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+}
+
+    .moveablePortletBaseSmall
+    {
+        background-color: #BF8F30;
+        margin: 5px;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        width: 150px;
+        height: 150px;
+    }
+
+    .moveablePortletBaseLarge
+    {
+        background-color: #BF8F30;
+        margin: 5px;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        width: 305px;
+        height: 150px;
+    }
+
+.heroText
+{
+    color: white;
+    font-size: 28pt;
+    text-align: center;
+    margin-left: 5px;
+}
+
+.descriptiveText
+{
+    color: white;
+    font-size: 10pt;
+    margin: 5px;
+    padding: 5px;
+    clear: both;
+}
+
+.footer
+{
+    width: 95%;
+    background-color: #A66F00;
+    height: 30px;
+    vertical-align: middle;
+    margin: 8px;
+    padding: 5px;
+    color: white;
+}
+
+.navBar
+{
+    width: 95%;
+    background-color: #A66F00;
+    height: 30px;
+    vertical-align: middle;
+    margin: 8px;
+    padding: 5px;
+    clear: both;
+    font-family: Aharoni;
+}
+
+    .navBar a
+    {
+        text-decoration: none;
+        font-size: 14pt;
+        margin: 8px;
+        padding: 8px;
+        color: white;
+    }
+
+.btnSaveCss
+{
+    width: 75px;
+    color: white;
+}

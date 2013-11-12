@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" data-ng-app="lacoePortal">
+<head>
+    <title>LACOE Portal</title>
+    <!-- Scripts -->
+    <script src="scripts/vendor/jquery-1.9.1.js"></script>
+    <script src="scripts/vendor/jquery-ui-1.10.3.js"></script>
+    <script src="scripts/vendor/jquery.ui.touch-punch.min.js"></script>
+    <script src="scripts/vendor/angular.js"></script>
+    <script src="scripts/portalMaint/portalScripts.js"></script>
+    <script src="scripts/portalMaint/lacoePortalController.js"></script>
+
+    <!-- Styles -->
+    <link href="styles/portalStyles.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/themes/base/jquery-ui.css" />
+</head>
+<body id="portalArea" data-ng-controller="MainController">
+    <header>
+        <div style="float: left;">
+            <span style="font-size: 48pt;">ESS</span>
+        </div>
+        <div style="float: left;">
+            <span style="font-size: 22pt; margin-top: 8px;">Enterprise
+                <br />
+                Software Services Team</span>
+        </div>
+    </header>
+    <div class="navBar">
+        <div style="float: left; margin-top: 5px;"><a href="#" id="A1" class="navBar">Back to Portal</a></div>
+        <div style="float: right; margin-top: 5px;"><a href="#" id="btnSave" class="navBar">S a v e </a></div>
+    </div>
+    <section id="portlets" style="clear: both;">
+        <div class="moveablePortletBase{{portlet.portletType}}" 
+            data-ng-repeat="portlet in objPortlet"
+            data-ng-style="{left: portlet.portletLeft + 'px', top: portlet.portletTop+'px', 'position': relative}"
+            data-portletname="PR">
+            <span class="heroText" data-portletname=" {{portlet.portletName}} ">{{portlet.portletName}} </span>
+            <img src="{{portlet.portletImage}}" style="margin-left: 3px; border-top-right-radius: 8px; border-bottom-left-radius: 8px;" data-portletname="SPED4" />
+            <p class="descriptiveText" data-portletname="PR">
+                {{portlet.portletMessage}}
+            </p>
+        </div>
+    </section>
+    <footer>
+        <div class="footer">
+            SEITMC Enterprise Software Services Team &copy; 2014
+        </div>
+    </footer>
+</body>
+</html>
