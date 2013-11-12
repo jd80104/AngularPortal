@@ -1,0 +1,148 @@
+
+// Variables
+@default-corner-radius: 8px;
+@border-color: #aaa;
+@accent1: #20537d;
+@color-text-default: #373737;
+@font-size: 14px;
+@grid-padding: 20px;
+@line-height: 16px;
+@input-max-height: 30px; // Desired total height, including borders
+@input-padding-horiz: @input-max-height * .333;
+@input-padding-vert: (@input-max-height - @line-height - 2) * .5;
+
+@button-height: @input-max-height * 1.2;
+
+@small-multiplier: .75;
+
+// Reset
+
+.reset() {
+    html, body, div, span, object, iframe,
+    h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+    a, abbr, acronym, address, code,
+    del, dfn, em, img, q, dl, dt, dd, ol, ul, li,
+    fieldset, form, label, legend,
+    table, caption, tbody, tfoot, thead, tr, th, td {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-weight: inherit;
+        font-style: inherit;
+        font-size: 100%;
+        font-family: inherit;
+        vertical-align: baseline;
+    }
+
+
+    body { line-height: 1.3; background: #fff; margin:0; }
+
+    /* Tables still need 'cellspacing="0"' in the markup. */
+    table { border-collapse: separate; border-spacing: 0; }
+    caption, th, td { text-align: left; font-weight:400; }
+
+    /* Remove possible quote marks (") from <q>, <blockquote>. */
+    blockquote:before, blockquote:after, q:before, q:after { content: ""; }
+    blockquote, q { quotes: "" ""; }
+
+    a img { border: none; }
+
+}
+
+
+
+// Mixins
+.clearAfter() { &:after { content: ""; display: block; height: 0; clear: both; visibility: hidden; } }
+
+// Corners (modeled after jQuery UI)
+.corners {
+    .tl(@radius: @default-corner-radius) { -moz-border-radius-topleft: @radius; -webkit-border-top-left-radius: @radius; border-top-left-radius: @radius; }
+    .tr(@radius: @default-corner-radius) { -moz-border-radius-topright: @radius; -webkit-border-top-right-radius: @radius; border-top-right-radius: @radius; }
+    .bl(@radius: @default-corner-radius) { -moz-border-radius-bottomleft: @radius; -webkit-border-bottom-left-radius: @radius; border-bottom-left-radius: @radius; }
+    .br(@radius: @default-corner-radius) { -moz-border-radius-bottomright: @radius; -webkit-border-bottom-right-radius: @radius; border-bottom-right-radius: @radius; }
+    .top(@radius: @default-corner-radius) { .corners > .tl(@radius); .corners > .tr(@radius); }
+    .bottom(@radius: @default-corner-radius) { .corners > .bl(@radius); .corners > .br(@radius); }
+    .right(@radius: @default-corner-radius) {  .corners > .tr(@radius); .corners > .br(@radius); }
+    .left(@radius: @default-corner-radius) { .corners > .tl(@radius); .corners > .bl(@radius); }
+    .all(@radius: @default-corner-radius) { -moz-border-radius: @radius; -webkit-border-radius: @radius; border-radius: @radius; }
+}
+
+.gradient {
+    .light-to-dark(@background, @strength: 0.1) {
+        @from: mix(rgb(255, 255, 255), @background, @strength * 100);
+        @to: mix(rgb(0, 0, 0), @background, @strength * 100);
+        background: @background;
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(@from), to(@to));
+        background: -moz-linear-gradient(center top, @from 0%, @to 100%);
+        .ie(@background, @strength: 0.1) {
+            .gradient > .light-to-dark(@background, @strength);
+            // filter:formatString("progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr={0}, EndColorStr={1})", mix(rgb(255, 255, 255), @background, @strength * 100), mix(rgb(0, 0, 0), @background, @strength * 100));
+        }
+        
+        .with-image(@background, @strength: 0.1, @img: url()) {
+            @from: mix(rgb(255, 255, 255), @background, @strength * 100);
+            @to: mix(rgb(0, 0, 0), @background, @strength * 100);
+            background: @background @img;
+            background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(@from), to(@to)), @img, @background;
+            background: -moz-linear-gradient(center top, @from 0%, @to 100%), @img, @background;
+        }
+    }
+    .dark-to-light(@background, @strength: 0.1) {
+        @from: mix(rgb(0, 0, 0), @background, @strength * 100);
+        @to: mix(rgb(255, 255, 255), @background, @strength * 100);
+        background: @background;
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(@from), to(@to));
+        background: -moz-linear-gradient(center top, @from 0%, @to 100%);
+        .ie(@background, @strength: 0.1) {
+            .gradient > .dark-to-light(@background, @strength);
+            // filter:formatString("progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr={0}, EndColorStr={1})", mix(rgb(0, 0, 0), @background, @strength * 100), mix(rgb(255, 255, 255), @background, @strength * 100));
+        }
+    }
+    .beveled(@background, @strength: 0.1, @img: url()) {
+        @from: mix(rgb(255, 255, 255), @background, @strength * 100);
+        @to: mix(rgb(0, 0, 0), @background, @strength * 100);
+        background: @background @img;
+        background: @img, -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255, 255, 255, @strength)), to(rgba(0, 0, 0, @strength))), @background;
+        background: @img, -moz-linear-gradient(center top, rgba(255, 255, 255, @strength) 0%, rgba(0, 0, 0, @strength) 100%), @background;
+        // filter: formatString("progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr={0}, EndColorStr={1})", @from, @to);
+    }
+    .simple(@background, @from, @to) {
+        background: @background;
+        background: -webkit-gradient(linear, 0 0, 0 100%, from(@from), to(@to));
+        background: -moz-linear-gradient(center top, @from 0, @to 100%);
+        .ie(@background, @from, @to) {
+            .gradient > .simple(@background, @from, @to); 
+            // filter:formatString("progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr={0}, EndColorStr={1})", @from, @to);
+        }
+    }
+    .with-image(@background, @from, @to, @img: url()) {
+        background: @background @img;
+        background: @img, -webkit-gradient(linear, 0% 0%, 0% 100%, from(@from), to(@to)), @background;
+        background: @img, -moz-linear-gradient(center top, @from 0%, @to 100%), @background;
+    }
+}
+.shadow {
+    .standard() {}
+    .inset() {}
+    .highlight(@strength) {
+        // Because of Chrome Windows, Im leaving this out for now. Sad.
+        // -webkit-box-shadow: inset rgba(255, 255, 255, @strength) 0 1px 0;
+        -moz-box-shadow: inset rgba(255, 255, 255, @strength) 0 1px 0;
+        box-shadow: inset rgba(255, 255, 255, @strength) 0 1px 0;
+    }
+    .custom(@shadow) {
+        -webkit-box-shadow: @shadow;
+        -moz-box-shadow: @shadow;
+        box-shadow: @shadow;
+    }
+    .dual(@shadow1, @shadow2) {
+        -webkit-box-shadow: @shadow1, @shadow2;
+        -moz-box-shadow: @shadow1, @shadow2;
+        box-shadow: @shadow1, @shadow2;
+    }
+    .triple(@shadow1, @shadow2, @shadow3) {
+        -webkit-box-shadow: @shadow1, @shadow2, @shadow3;
+        -moz-box-shadow: @shadow1, @shadow2, @shadow3;
+        box-shadow: @shadow1, @shadow2, @shadow3;
+    }
+}
