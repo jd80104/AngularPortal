@@ -1,35 +1,34 @@
 <!doctype html>
-<html>
+<html data-ng-app="Portal">
 <head>
-
-<script src="scripts/vendor/jquery-1.9.1.min.js"></script>
-<script src="scripts/vendor/jquery-ui-1.10.3.custom.min.js"></script>
-<script src="scripts/login/loginScripts.js"></script>
-
-<title>Portal Login</title>
-<link rel="stylesheet" type="text/css" href="styles/animate-custom.css" />
-<link rel="stylesheet" type="text/css" href="styles/loginStyle.css" />
-
+    <title>Portal Login</title>
+    <link rel="stylesheet" type="text/css" href="styles/animate-custom.css" />
+    <link rel="stylesheet" type="text/css" href="styles/loginStyle.css" />
 </head>
 <body>
+    <form ng-submit="loginFormSubmit()" ng-controller="loginController">
+        <div id="loginForm" class="animated bounceInDown">
+            <h1>Account Sign In</h1>
 
-<div id="loginForm" class="animated bounceInDown">
-	<h1>Account Sign In</h1>
-	
-	<p>
-		<label for="email">Email Address</label>
-		<input type="email" name="email" id="email" class="text" />
-	</p>
-	
-	<p>
-		<label for="password">Password</label>
-		<input type="password" name="password" id="password" class="text" />
-	</p>
-	
-	<button class="cancel">Cancel</button>
-	<button class="submit">Sign In</button>
-</div>
+            <p>
+                <label for="email">Email Address</label>
+                <input type="email" name="email" id="email" class="text" />
+            </p>
 
+            <p>
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" class="text" />
+            </p>
+
+            <button class="cancel">Cancel</button>
+            <button class="submit">Sign In</button>
+        </div>
+    </form>
+    <script src="scripts/vendor/jquery-1.9.1.min.js"></script>
+    <script src="scripts/vendor/jquery-ui-1.10.3.min.js"></script>
+    <script src="scripts/vendor/angular.js"></script>
+    <script src="scripts/login/loginController.js"></script>
+    <script src="scripts/login/loginScripts.js"></script>
 </body>
 </html>
 

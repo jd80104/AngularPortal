@@ -4,17 +4,25 @@
     Last Update: 11/9/2013
     Description: Angular/Jquery portal template with drag and drop portlets.
 */
-var lacoePortal = angular.module("lacoePortal", []);
+var Portal = angular.module("Portal", []);
 var objPortlet = [];
 
-lacoePortal.controller('MainController', ['$scope', function ($scope) {
+Portal.controller('MainController', ['$scope', function ($scope) {
+    $scope.objUser = [
+        {
+            userId: 1,
+            userName: 'John D Sanders',
+            isAdmin: true,
+            isValid: true
+        }
+    ];
     $scope.objPortlet = [
         {
             portletName: "EPIC",
             portletTop: 0,
             portletLeft: 0,
             portletType: "Small",
-            portletUrl: 'http://www.seitmc.com',
+            portletUrl: 'http://production.lacoemis.org',
             portletImage: 'http://www.placehold.it/144x100&text=graphic',
             portletMessage: 'Epic SIS'
         },
@@ -68,8 +76,8 @@ lacoePortal.controller('MainController', ['$scope', function ($scope) {
             portletTop: -620,
             portletLeft: 0,
             portletType: "Small",
-            portletUrl: 'http://www.seitmc.com',
-            portletImage: 'http://www.placehold.it/144x100&text=graphic',
+            portletUrl: 'content/portlet1/portlet1.html',
+            portletImage: '',
             portletMessage: ''
         },
         {
@@ -92,3 +100,16 @@ lacoePortal.controller('MainController', ['$scope', function ($scope) {
         },
     ];
 }]);
+
+
+function openPortlet(url, portletName) {
+    if (portletName === "ANY 2") {
+        $("#dialog-form").dialog("open");
+    }
+    else {
+        if (url.indexOf('http://') != -1)
+            window.open(url, '_blank', "toolbar=yes, scrollbars=yes, resizable=yes, top=500, left=500, width=1000, height=800");
+        else
+            window.open(url, '_blank', "toolbar=no, scrollbars=no, resizable=yes, top=0, left=0, width=1000, height=800");
+    }
+};
