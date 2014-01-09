@@ -3,65 +3,112 @@
 <head>
     <title>LACOE Portal</title>
     <!-- Styles -->
-    <link href="styles/portalStyles.css" rel="stylesheet"/>
+    <link href="shared/styles/toastr.min.css" rel="stylesheet" />
+    <link href="shared/styles/ng-grid.min.css" rel="stylesheet" />
+    <link href="content/portalMaint/portalStyles.css" rel="stylesheet" />
+    <link href="shared/scripts/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="shared/scripts/vendor/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css"
-          href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/themes/base/jquery-ui.css"/>
+          href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/themes/base/jquery-ui.css" />
 </head>
 <body id="portalArea" data-ng-controller="MainController">
-<header>
-    <div style="float: left;">
-        <span style="font-size: 48pt;">ESS</span>
+    <!-- Static navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation" ng-hide="objUser.IsAdmin">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Angular Portal Maintenance</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">Portlets</a></li>
+                    <li><a href="#">Maintenance</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">User Account <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">User Maintenance</a></li>
+                            <li><a href="#">Portlet Maintenance</a></li>
+                            <li class="divider"></li>
+                            <!--<li class="dropdown-header">Nav header</li>-->
+                            <li><a href="#">Separated link</a></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Login</a></li>
+                    <!--<li><a href="./">Default</a></li>
+                    <li class="active"><a href="../navbar-static-top/">Static top</a></li>
+                    <li><a href="../navbar-fixed-top/">Fixed top</a></li>-->
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
     </div>
-    <div style="float: left;">
-        <span style="font-size: 22pt; margin-top: 8px;">Enterprise<br/>Software Services Team</span>
-    </div>
-    <div style="float:right; margin-right: 15px; padding-right: 15px;">Hi {{objUser[0].userName}}!</div>
-</header>
-<div class="navBar">
-    <div style="float: left; margin-top: 5px;"><a href="#" id="A1" class="navBar">Back to Portal</a></div>
-    <div style="float: right; margin-top: 5px;"><a href="#" id="btnSave" class="navBar">S a v e </a></div>
-</div>
-<section id="portlets" style="clear: both;">
-    <div class="moveablePortletBase{{portlet.portletType}}"
-         data-ng-repeat="portlet in objPortlet"
-         data-ng-style="{left: portlet.portletLeft + 'px', top: portlet.portletTop+'px', 'position': relative}"
-         data-portletname="PR">
-        <span class="heroText" onclick="openPortlet('{{portlet.portletUrl}}', '{{portlet.portletName}}')"
-              data-portletname=" {{portlet.portletName}} ">{{portlet.portletName}} </span>
-        <img src="{{portlet.portletImage}}"
-             style="margin-left: 3px; border-top-right-radius: 8px; border-bottom-left-radius: 8px;"
-             data-portletname="SPED4"/>
 
-        <p class="descriptiveText" data-portletname="PR">
-            {{portlet.portletMessage}}
-        </p>
+    <header style="margin-top: 50px;">
+        <div style="float: left;">
+            <span style="font-size: 48pt;">ESS</span>
+        </div>
+        <div style="float: left;">
+            <span style="font-size: 22pt; margin-top: 8px;">Enterprise<br />Software Services Team</span>
+        </div>
+        <div style="float:right; margin-right: 15px; padding-right: 15px; margin-top: 16px;">Hi {{objUser[0].userName}}!</div>
+    </header>
+    <div class="navBar">
+        <div style="float: left; margin-top: 0px;"><a href="#" id="A1" class="navBar">Back to Portal</a></div>
+        <div style="float: right; margin-top: 0px;"><a href="#" id="btnSave" class="navBar">S a v e </a></div>
     </div>
-</section>
-<div id="dialog-form" title="Portlet based on portlet framework!">
-    <form>
-        <fieldset>
-            <legend></legend>
-            <label for="name">Name</label>
-            <input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all"/><br/>
-            <label for="email">Email</label>
-            <input type="text" name="email" id="email" value="" class="text ui-widget-content ui-corner-all"/><br/>
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all"/>
-        </fieldset>
-    </form>
-</div>
-<footer>
-    <div class="footer">
-        SCCS Enterprise Software Services Team &copy; 2014
+    <section id="portlets" style="clear: both;">
+        <div class="moveablePortletBase{{portlet.portletType}}"
+             data-ng-repeat="portlet in objPortlet"
+             data-ng-style="{left: portlet.portletLeft + 'px', top: portlet.portletTop+'px', 'position': relative}"
+             data-portletname="PR">
+            <span class="heroText" onclick="openPortlet('{{portlet.portletUrl}}', '{{portlet.portletName}}')"
+                  data-portletname=" {{portlet.portletName}} ">{{portlet.portletName}}</span>
+            <img ng-src="{{portlet.portletImage}}"
+                 style="margin-left: 3px; border-top-right-radius: 8px; border-bottom-left-radius: 8px;"
+                 data-portletname="SPED4" />
+
+            <p class="descriptiveText" data-portletname="PR">
+                {{portlet.portletMessage}}
+            </p>
+        </div>
+    </section>
+    <div id="dialog-form" title="Portlet based on portlet framework!">
+        <form>
+            <fieldset>
+                <legend></legend>
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all" /><br />
+                <label for="email">Email</label>
+                <input type="text" name="email" id="email" value="" class="text ui-widget-content ui-corner-all" /><br />
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all" />
+            </fieldset>
+        </form>
     </div>
-</footer>
+    <footer>
+        <div class="footer">
+            SCCS Enterprise Software Services Team &copy; 2014
+        </div>
+    </footer>
     <!-- Scripts -->
-    <script src="scripts/vendor/jquery-1.9.1.js"></script>
-    <script src="scripts/vendor/jquery-ui-1.10.3.js"></script>
-    <script src="scripts/vendor/jquery.ui.touch-punch.min.js"></script>
-    <script src="scripts/vendor/angular.js"></script>
-    <script src="scripts/vendor/angular-resource.min.js"></script>
-    <script src="scripts/portalMaint/portalScripts.js"></script>
-    <script src="scripts/portalMaint/portalController.js"></script>
+    <script src="shared/scripts/vendor/jquery-1.9.1.js"></script>
+    <script src="shared/scripts/vendor/jquery-ui-1.10.3.js"></script>
+    <script src="shared/scripts/vendor/jquery.ui.touch-punch.min.js"></script>
+    <script src="shared/scripts/vendor/angular.js"></script>
+    <script src="shared/scripts/vendor/angular-resource.min.js"></script>
+    <!--<script src="shared/scripts/vendor/angular-bootstrap.min.js"></script>
+    <script src="shared/scripts/vendor/angular-bootstrap-prettify.min.js"></script>
+    <script src="shared/scripts/vendor/toastr.min.js"></script>-->
+    <script src="shared/scripts/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="content/portalMaint/portalController.js"></script>
+    <script src="content/portalMaint/portalScripts.js"></script>
+    <script src="shared/directives/directives.js"></script>
 </body>
 </html>

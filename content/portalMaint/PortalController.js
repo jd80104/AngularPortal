@@ -12,8 +12,8 @@ Portal.controller('MainController', ['$scope', function ($scope) {
         {
             userId: 1,
             userName: 'John D Sanders',
-            isAdmin: true,
-            isValid: true
+            IsAdmin: true,
+            IsValid: true
         }
     ];
     $scope.objPortlet = [
@@ -23,7 +23,7 @@ Portal.controller('MainController', ['$scope', function ($scope) {
             portletLeft: 0,
             portletType: "Small",
             portletUrl: 'http://production.lacoemis.org',
-            portletImage: 'http://www.placehold.it/144x100&text=graphic',
+            portletImage: 'http://www.placehold.it/144x85&text=graphic',
             portletMessage: 'Epic SIS'
         },
         {
@@ -32,7 +32,7 @@ Portal.controller('MainController', ['$scope', function ($scope) {
             portletLeft: 465,
             portletType: "Small",
             portletUrl: 'http://www.seitmc.com',
-            portletImage: 'http://www.placehold.it/144x100&text=graphic',
+            portletImage: 'http://www.placehold.it/144x85&text=graphic',
             portletMessage: ''
         },
         {
@@ -50,7 +50,7 @@ Portal.controller('MainController', ['$scope', function ($scope) {
             portletLeft: 465,
             portletType: "Small",
             portletUrl: 'http://www.seitmc.com',
-            portletImage: 'http://www.placehold.it/144x100&text=graphic',
+            portletImage: 'http://www.placehold.it/144x85&text=graphic',
             portletMessage: ''
         },
         {
@@ -59,7 +59,7 @@ Portal.controller('MainController', ['$scope', function ($scope) {
             portletLeft: 0,
             portletType: "Small",
             portletUrl: 'http://www.seitmc.com',
-            portletImage: 'http://www.placehold.it/144x100&text=graphic',
+            portletImage: 'http://www.placehold.it/144x85&text=graphic',
             portletMessage: 'Free and Reduced Meals'
         },
         {
@@ -86,7 +86,7 @@ Portal.controller('MainController', ['$scope', function ($scope) {
             portletLeft: 465,
             portletType: "Small",
             portletUrl: 'http://www.seitmc.com',
-            portletImage: 'http://www.placehold.it/144x100&text=graphic',
+            portletImage: 'http://www.placehold.it/144x85&text=graphic',
             portletMessage: ''
         },
         {

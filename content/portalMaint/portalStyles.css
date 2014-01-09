@@ -73,7 +73,7 @@ body
 {
     width: 95%;
     background-color: #A66F00;
-    height: 30px;
+    height: 37px;
     vertical-align: middle;
     margin: 8px;
     padding: 5px;
@@ -94,4 +94,8 @@ body
 {
     width: 75px;
     color: white;
+}
+
+.navbar-static-top {
+  margin-bottom: 19px;
 }
